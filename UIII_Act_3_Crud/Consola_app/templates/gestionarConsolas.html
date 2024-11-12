@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+
+
+{% block cuerpo %}
+<div class="row"><!-- La fila -->
+    <div class="col-sm-12 col-md-4 col-lg-4 xl-4"><!-- Columna izquierda -->
+
+    <h1>Insertar consola</h1>
+<div class="card"><!-- La tarjeta -->
+    <div class="card-body">
+    <form action="registrarConsola/" method="POST">{% csrf_token %}<!-- Falta action -->
+        <div class="form-group">
+            <input type="text" id="txtid" name="txtid" class="form-control" placeholder="Id Consola" minlength="1" maxlength="6" required>
+        </div>
+        <div class="form-group py-3">
+            <input type="text" id="txtnombre" name="txtnombre" class="form-control" placeholder="Nombre" maxlength="100" required>
+        </div>
+        <div class="form-group py-2">
+            <input type="text" id="txtfabricante" name="txtfabricante" class="form-control" placeholder="Fabricante" maxlength="100" required>
+        </div>
+        <div class="form-group py-2">
+            <button type="submit" class="btn btn-primary">Guardar Consola</button>
+        </div>
+    </form>
+    </div>
+</div><!-- La tarjeta -->
+</div><!-- Columna izquierda -->
+
+<div class="col-sm-12 col-md-8 col-lg-8 xl-8"><!-- Columna derecha -->
+    <h1>Listado de consolas</h1>
+    <!-- La tabla -->
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Fabricante</th>
+            <th>Opciones</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for m in misconsolas %}
+            <tr>
+                <td>
+                    {{forloop.counter}}
+                </td>
+                <td>
+                    {{m.id_consola}}
+                </td>
+                <td>
+                    {{m.nombre}}
+                </td>
+                <td>
+                    {{m.fabricante}}
+                </td>
+                <td>
+                    <a href="seleccionarConsola/{{m.id_consola}}" class="btn btn-info">Editar</a>
+                </td><!-- Falta -->
+                <td>
+                    <a href="borrarConsola/{{m.id_consola}}" class="btn btn-danger">Borrar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <!-- La tabla -->
+    </div><!-- Columna derecha -->
+    </div><!-- La fila -->
+{% endblock %}
